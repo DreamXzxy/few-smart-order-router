@@ -1,6 +1,6 @@
 import { Logger } from '@ethersproject/logger';
 import { flags } from '@oclif/command';
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from 'few-router-sdk';
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core';
 import dotenv from 'dotenv';
 import _ from 'lodash';
@@ -202,8 +202,7 @@ export class Quote extends BaseCommand {
 
     if (!swapRoutes) {
       log.error(
-        `Could not find route. ${
-          debug ? '' : 'Run in debug mode for more info'
+        `Could not find route. ${debug ? '' : 'Run in debug mode for more info'
         }.`
       );
       return;

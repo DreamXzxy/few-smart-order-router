@@ -4,7 +4,7 @@
 
 import { JsonRpcProvider, JsonRpcSigner } from '@ethersproject/providers';
 import { AllowanceTransfer, PermitSingle } from '@uniswap/permit2-sdk';
-import { Protocol } from '@uniswap/router-sdk';
+import { Protocol } from 'few-router-sdk';
 import {
   ChainId,
   Currency,
@@ -19,9 +19,9 @@ import {
 import {
   PERMIT2_ADDRESS,
   UNIVERSAL_ROUTER_ADDRESS as UNIVERSAL_ROUTER_ADDRESS_BY_CHAIN
-} from '@uniswap/universal-router-sdk';
-import { Permit2Permit } from '@uniswap/universal-router-sdk/dist/utils/inputTokens';
-import { Pair } from '@uniswap/v2-sdk';
+} from 'few-universal-router-sdk';
+import { Permit2Permit } from 'few-universal-router-sdk/dist/utils/inputTokens';
+import { Pair } from 'few-v2-sdk';
 import { encodeSqrtRatioX96, FeeAmount, Pool } from '@uniswap/v3-sdk';
 import bunyan from 'bunyan';
 import { BigNumber, providers, Wallet } from 'ethers';
@@ -2417,7 +2417,7 @@ describe('alpha router integration', () => {
           GREENLIST_TOKEN_PAIRS.forEach(([tokenIn, tokenOut]) => {
             it(`${tokenIn.symbol} -> ${tokenOut.symbol} with portion`, async () => {
               const originalAmount = (tokenIn.symbol === 'WBTC' && tradeType === TradeType.EXACT_INPUT) ||
-              (tokenOut.symbol === 'WBTC' && tradeType === TradeType.EXACT_OUTPUT)
+                (tokenOut.symbol === 'WBTC' && tradeType === TradeType.EXACT_OUTPUT)
                 ? '1'
                 : '100';
               const amount =
@@ -2500,7 +2500,7 @@ describe('alpha router integration', () => {
               );
 
               // skip checking token in amount for native ETH, since we have no way to know the exact gas cost in terms of ETH token
-              const checkTokenInAmount = tokenIn.isNative ? undefined: parseFloat(amount.toFixed(0))
+              const checkTokenInAmount = tokenIn.isNative ? undefined : parseFloat(amount.toFixed(0))
               // skip checking token out amount for native ETH, since we have no way to know the exact gas cost in terms of ETH token
               const checkTokenOutAmount = tokenOut.isNative ? undefined : parseFloat(amount.toFixed(0))
               const checkPortionAmount = parseFloat(expectedPortionAmount.toFixed(0))
@@ -3101,7 +3101,7 @@ describe('quote for other networks', () => {
       const erc1 = TEST_ERC20_1[chain]();
       const erc2 = TEST_ERC20_2[chain]();
 
-      describe(`${ID_TO_NETWORK_NAME(chain)} ${tradeType} 2xx`, function() {
+      describe(`${ID_TO_NETWORK_NAME(chain)} ${tradeType} 2xx`, function () {
         const wrappedNative = WNATIVE_ON(chain);
 
         let alphaRouter: AlphaRouter;
@@ -3168,7 +3168,7 @@ describe('quote for other networks', () => {
           });
         });
 
-        describe(`Swap`, function() {
+        describe(`Swap`, function () {
           it(`${wrappedNative.symbol} -> erc20`, async () => {
             const tokenIn = wrappedNative;
             const tokenOut = erc1;
@@ -3334,7 +3334,7 @@ describe('quote for other networks', () => {
         });
 
         if (isTenderlyEnvironmentSet()) {
-          describe(`Simulate + Swap ${tradeType.toString()}`, function() {
+          describe(`Simulate + Swap ${tradeType.toString()}`, function () {
             // Tenderly does not support Celo
             if ([ChainId.CELO, ChainId.CELO_ALFAJORES].includes(chain)) {
               return;

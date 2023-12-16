@@ -7,7 +7,7 @@ import { ChainId } from '@uniswap/sdk-core';
 import {
   PERMIT2_ADDRESS,
   UNIVERSAL_ROUTER_ADDRESS,
-} from '@uniswap/universal-router-sdk';
+} from 'few-universal-router-sdk';
 import axios, { AxiosRequestConfig } from 'axios';
 import { BigNumber } from 'ethers/lib/ethers';
 
